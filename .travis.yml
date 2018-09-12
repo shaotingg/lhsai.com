@@ -1,0 +1,24 @@
+branches:
+  only:
+    - master
+language: node_js
+node_js:
+  - "8.11.3"
+cache:
+  yarn: true
+  directories:
+    - node_modules
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
+install:
+  - yarn
+  - yarn generate
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: public
+  target_branch: gh-pages
+  on:
+    branch: master
