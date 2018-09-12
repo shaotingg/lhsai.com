@@ -1,3 +1,6 @@
+<a href="#" id="status-image-popup" title="Latest push build on default branch: passed" name="status-images" class="open-popup" data-ember-action="" data-ember-action-1528="1528">
+  <img src="https://www.travis-ci.org/fanteme/fantem.com.svg?branch=master" alt="build:passed">
+</a>
 # bob
 
 > nuxt templete
@@ -20,4 +23,3 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
-
