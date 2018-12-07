@@ -1,3 +1,5 @@
+import bodyParser from 'body-parser'
+import session from 'express-session'
 export default {
   /*
   ** Headers of the page
@@ -25,7 +27,11 @@ export default {
   */
   loading: { color: '#3B8070' },
   modules: [
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/axios'
+  ],
+  plugins: [
+    { src: '~/plugins/vue-cookies', ssr: false }
   ],
   /*
   ** Build configuration
@@ -40,6 +46,20 @@ export default {
         config.devtool = 'eval-source-map'
       }
     }
-  }
+  },
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'lhsai-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login & /api/logout routes
+    '~/api'
+  ]
 }
 

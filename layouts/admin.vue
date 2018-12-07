@@ -9,15 +9,14 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app>
+     <v-toolbar app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>首页</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-title @click="logout">退出</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <nuxt/>
     </v-content>
-    <v-footer app><v-spacer></v-spacer><div>&copy; {{ new Date().getFullYear() }}</div></v-footer>
   </v-app>
 </template>
 <script>
@@ -26,19 +25,26 @@ export default {
     return {
       links: [
         {
-          title: '首页',
-          link: '/'
-        },
-        {
           title: 'css样式',
-          link: '/'
+          link: '/admin/css'
         },
         {
           title: '前端框架',
-          link: '/'
+          link: '/admin/front-end'
         }
       ],
       drawer: true
+    }
+  },
+  methods: {
+    async logout() {
+      try {
+        const { data } = await this.$axios.post('/api/logout')
+        this.$cookies.remove('_lhsai_user')
+        this.$router.push({path: '/login'})
+      } catch (error) {
+          this.message = error.message
+      }
     }
   }
 }

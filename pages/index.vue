@@ -3,14 +3,15 @@
     <h1>首页</h1>
   </section>
 </template>
-
-<script>
-
-export default {
-
-}
-</script>
-
 <style lang="stylus">
 
 </style>
+<script>
+export default {
+  head () {
+    return {
+      title: '首页'
+    }
+  }
+}
+</script>
