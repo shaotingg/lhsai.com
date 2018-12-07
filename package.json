@@ -20,7 +20,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "knex": "^0.15.2",
-    "nuxt": "^2.2.0",
+    "nuxt": "^2.3.4",
     "nuxt-property-decorator": "^1.2.0",
     "sqlite3": "^4.0.4",
     "stylus": "^0.54.5",
