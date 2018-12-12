@@ -31,7 +31,8 @@ export default {
     '@nuxtjs/axios'
   ],
   plugins: [
-    { src: '~/plugins/vue-cookies', ssr: false }
+    { src: '~/plugins/vue-cookies', ssr: false },
+    { src: '~/plugins/vue-mavonEditor', ssr: false }
   ],
   /*
   ** Build configuration

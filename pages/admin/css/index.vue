@@ -23,7 +23,8 @@
               <td>{{item.image}}</td>
               <td class="text-lg-left">{{item.excerpt}}</td>
               <td class="text-lg-center">
-                <v-btn color="primary">添加</v-btn>
+                <nuxt-link to="/admin/css/add"><v-btn color="info">添加</v-btn></nuxt-link>
+                <v-btn color="primary">修改</v-btn>
                 <v-btn color="error">删除</v-btn>
               </td>
             </tr>
