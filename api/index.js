@@ -1,4 +1,5 @@
 import express from 'express'
+import css from './controllers/css'
 
 // Create express router
 const router = express.Router()
@@ -12,6 +13,7 @@ router.use((req, res, next) => {
   req.res = res
   res.req = req
   if (
+    req.method == 'GET' ||
     req.url == '/login' ||
     req.url == '/logout'
   ) {
@@ -22,6 +24,8 @@ router.use((req, res, next) => {
     res.status(401).json({ message: '你没有权限' })
   }
 })
+//Add GET -/api/css
+router.get('/css', css.all)
 
 // Add POST - /api/login
 router.post('/login', (req, res) => {
