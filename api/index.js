@@ -29,6 +29,7 @@ router.get('/css', css.all)
 router.post('/css/add', css.add)
 router.get('/css/:id', css.get)
 router.put('/css/:id', css.update)
+router.delete('/css/:id', css.delete)
 
 // Add POST - /api/login
 router.post('/login', (req, res) => {

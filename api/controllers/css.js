@@ -29,5 +29,13 @@ export default {
     }catch(error){
       res.json(error)
     }
+  },
+  delete: async(req,res)=> {
+    try{
+      await db('css').where('id', req.params.id).del()
+      res.json({success: true})
+    }catch(error){
+      res.json(error)
+    }
   }
 }

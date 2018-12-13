@@ -25,7 +25,7 @@
               <td class="text-lg-center">
                 <nuxt-link to="/admin/css/add"><v-btn color="info">添加</v-btn></nuxt-link>
                 <nuxt-link :to="`/admin/css/${item.id}`"><v-btn color="primary">修改</v-btn></nuxt-link>
-                <v-btn color="error">删除</v-btn>
+                <v-btn :disabled="active && currentidx == item.id" color="error" @click="del(item.id,index)">删除</v-btn>
               </td>
             </tr>
           </tbody>
@@ -52,7 +52,9 @@ export default {
       checkbox: [],
       page: 1,
       css: [],
-      pageCount: 1
+      pageCount: 1,
+      active: false,
+      currentidx: ''
     }
   },
   mounted() {
@@ -60,6 +62,18 @@ export default {
       this.css = res.data.css
       this.pageCount = res.data.pageCount
     })
+  },
+  methods: {
+    async del(id,idx) {
+      this.active = true
+      this.currentidx = id
+      await this.$axios.delete(`/api/css/${id}`).then((res)=>{
+        if(res.data.success == true){
+          this.active = false
+          this.css.splice(idx, 1)
+        }
+      })
+    }
   }
 }
 </script>
