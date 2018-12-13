@@ -56,7 +56,7 @@ export default {
       secret: 'lhsai-secret-key',
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 60000 }
+      cookie: { maxAge: 60*60000 }
     }),
     // Api middleware
     // We add /api/login & /api/logout routes

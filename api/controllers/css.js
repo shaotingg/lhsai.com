@@ -1,5 +1,4 @@
 import db from './../db'
-import { createTextChangeRange } from 'typescript';
 
 export default {
   all: async(req,res)=> {
@@ -13,6 +12,19 @@ export default {
     const {css} = req.body
     try{
       await db('css').insert({...css})
+      res.json({success: true})
+    }catch(error){
+      res.json(error)
+    }
+  },
+  get: async(req,res)=> {
+    const css = await db('css').where('id', req.params.id)
+    res.json(css)
+  },
+  update: async(req,res)=> {
+    const {css} = req.body
+    try{
+      await db('css').where('id', css.id).update({...css})
       res.json({success: true})
     }catch(error){
       res.json(error)

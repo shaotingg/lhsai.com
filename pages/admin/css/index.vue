@@ -24,7 +24,7 @@
               <td class="text-lg-left">{{item.excerpt}}</td>
               <td class="text-lg-center">
                 <nuxt-link to="/admin/css/add"><v-btn color="info">添加</v-btn></nuxt-link>
-                <v-btn color="primary">修改</v-btn>
+                <nuxt-link :to="`/admin/css/${item.id}`"><v-btn color="primary">修改</v-btn></nuxt-link>
                 <v-btn color="error">删除</v-btn>
               </td>
             </tr>
@@ -55,11 +55,10 @@ export default {
       pageCount: 1
     }
   },
-
   mounted() {
     this.$axios.get(`/api/css`).then((res)=>{
-        this.css = res.data.css
-        this.pageCount = res.data.pageCount
+      this.css = res.data.css
+      this.pageCount = res.data.pageCount
     })
   }
 }
