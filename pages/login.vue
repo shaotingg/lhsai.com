@@ -13,9 +13,10 @@
             label="Password"
             type="Password"
             required
+            @keyup.enter.native="login"
           ></v-text-field>
         </v-form>
-        <div class="text-xs-center"><v-btn class="primary" large @click="login">登录</v-btn></div>
+        <div class="text-xs-center"><v-btn class="primary" large @click.native="login">登录</v-btn></div>
       </v-flex>
     </v-layout>
   </v-container>
