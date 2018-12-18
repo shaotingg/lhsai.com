@@ -31,8 +31,10 @@ export default {
     }
   },
   delete: async(req,res)=> {
+    const ids = req.params.id
+    const arr = ids.split(',')
     try{
-      await db('css').where('id', req.params.id).del()
+      await db('css').whereIn('id', arr).del()
       res.json({success: true})
     }catch(error){
       res.json(error)

@@ -15,13 +15,13 @@
             <td class="text-xs-center">{{ props.item.excerpt }}</td>
             <td class="text-xs-center">
               <nuxt-link :to="`/admin/css/${props.item.id}`"><v-btn color="primary">修改</v-btn></nuxt-link>
-              <v-btn :disabled="active && currentidx == props.item.id" color="error" @click="del(props.item.id,index)">删除</v-btn>
+              <v-btn :disabled="active && currentidx == props.item.id" color="error" @click="del(props.item.id,props.index)">删除</v-btn>
             </td>
           </template>
           <template slot="footer">
             <td :colspan="headers.length">
               <v-checkbox class="checkbox" id="check-all" label="全选" v-model="checkboxall"></v-checkbox>
-              <v-btn color="error">删除</v-btn>
+              <v-btn :disabled="active && checkbox.length >= 0" color="error" @click="delAll()">删除</v-btn>
               <nuxt-link to="/admin/css/add"><v-btn color="info">添加</v-btn></nuxt-link>
             </td>
           </template>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       checkbox: [],
-      checkboxall: [],
+      checkboxall: false,
       css: [],
       active: false,
       currentidx: '',
@@ -64,7 +64,7 @@ export default {
   },
   watch: {
     checkboxall: function(val) {
-      if(val.length > 0){
+      if(val == true){
         this.checkbox = this.css
       }else{
         this.checkbox = []
@@ -85,6 +85,29 @@ export default {
         if(res.data.success == true){
           this.active = false
           this.css.splice(idx, 1)
+        }
+      })
+    },
+    async delAll() {
+      this.active = true
+      let ids = []
+      this.checkbox.forEach(element => {
+        ids.push(element.id)
+      })
+      await this.$axios.delete(`/api/css/${ids}`).then((res)=>{
+        if(res.data.success == true){
+          this.active = false
+          if(this.css.length == this.checkbox.length){
+            this.checkboxall = false
+            this.checkbox = []
+            this.css = []
+          }else {
+            this.checkbox.map(element=> {
+              let index = this.css.indexOf(element)
+              this.css.splice(index, 1)
+              this.checkbox = []
+            })
+          }
         }
       })
     }
