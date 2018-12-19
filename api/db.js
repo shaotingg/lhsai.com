@@ -8,7 +8,7 @@ const db = knex({
   },
   useNullAsDefault: true
 })
-// Create a table
+// Create css table
 db.schema
 .hasTable('css')
 .then( (exists) => {
@@ -27,5 +27,23 @@ db.schema
       console.log('error !!!', err.message, err.stack)
       return
   })
-
-  export default db
+// Create frontend table
+db.schema
+.hasTable('frontend')
+.then( (exists) => {
+    if(!exists) {
+      return db.schema.createTable('frontend', (t) =>{
+          t.increments('id').primary()
+          t.timestamp('date').defaultTo(db.fn.now())
+          t.string('title')
+          t.string('image')
+          t.string('excerpt')
+          t.text('content')
+      })
+    }
+  })
+  .catch( err => {
+      console.log('error !!!', err.message, err.stack)
+      return
+  })
+export default db

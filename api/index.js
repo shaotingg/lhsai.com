@@ -1,5 +1,6 @@
 import express from 'express'
 import css from './controllers/css'
+import admin from './controllers/admin'
 
 // Create express router
 const router = express.Router()
@@ -24,12 +25,15 @@ router.use((req, res, next) => {
     res.status(401).json({ message: '你没有权限' })
   }
 })
-//Add GET -/api/css
+//Css api
 router.get('/css', css.all)
 router.post('/css/add', css.add)
 router.get('/css/:id', css.get)
 router.put('/css/:id', css.update)
 router.delete('/css/:id', css.delete)
+
+//Admin api
+router.post('/admin/add', admin.add)
 
 // Add POST - /api/login
 router.post('/login', (req, res) => {
