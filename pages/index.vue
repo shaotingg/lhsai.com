@@ -3,7 +3,7 @@
     <v-layout align-center justify-center row>
       <v-flex xs12>
         <v-list>
-          <v-list-tile class="list" v-for="(item, index) in css" :key="index">
+          <v-list-tile class="list" v-for="(item, index) in css" :key="index" :to="`/${item.id}`">
             <v-list-tile-content>
               <v-list-tile-title v-html="item.title"></v-list-tile-title>
             </v-list-tile-content>
@@ -28,15 +28,14 @@ export default {
   },
   data() {
     return {
-      css: {
-        content: ''
-      }
+
     }
   },
-  mounted() {
-    this.$axios.get(`/api/css`).then((res)=>{
-      this.css = res.data.css
-    })
+  async asyncData({ app, store, params }) {
+    let { data } = await app.$axios.get(`/api/css`)
+    return{
+      css: data.css
+    }
   }
 }
 </script>
